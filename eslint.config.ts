@@ -2,22 +2,24 @@ import js from '@eslint/js'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
 import pluginVue from 'eslint-plugin-vue'
-import { defineConfig } from 'eslint/config'
 
-export default defineConfig([
+export default [
   {
     files: ['**/*.{js,mjs,cjs,ts,mts,cts,vue}'],
-    plugins: { js },
-    extends: ['js/recommended'],
-    languageOptions: { globals: globals.browser },
+    ...js.configs.recommended,
+    languageOptions: {
+      globals: globals.browser,
+    },
   },
   {
     files: ['**/*.js'],
-    languageOptions: { sourceType: 'script' },
+    languageOptions: {
+      sourceType: 'script',
+    },
   },
-  tseslint.configs.recommended,
+  ...tseslint.configs.recommended,
+  ...pluginVue.configs['flat/essential'],
   {
-    ...pluginVue.configs['flat/essential'],
     files: ['**/*.vue'],
     languageOptions: {
       parserOptions: {
@@ -27,8 +29,6 @@ export default defineConfig([
     rules: {
       // 👇 disable multi-word component name rule
       'vue/multi-word-component-names': 'off',
-      // 👇 you can also merge any existing rules here if needed
-      ...(pluginVue.configs['flat/essential'].rules || {}),
     },
   },
-])
+]

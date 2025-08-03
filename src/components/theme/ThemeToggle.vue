@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useColorMode } from '@vueuse/core';
 import Button from '../ui/button/Button.vue';
-import { computed, watch, type ComputedRef } from 'vue';
+import { computed, type ComputedRef } from 'vue';
 
 const mode = useColorMode({
     attribute: 'class',
@@ -10,7 +10,7 @@ const mode = useColorMode({
     emitAuto: true
 });
 
-const toggleMode: Function = ():void => {
+const toggleMode: () => void = () => {
     if (mode.value === 'light') {
         mode.value = 'dark';
         return;

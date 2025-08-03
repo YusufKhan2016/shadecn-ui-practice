@@ -15,7 +15,7 @@ import { Form } from 'vee-validate'
 const router: Router = useRouter();
 const visible = ref<boolean>(false);
 
-const navigateToDashboard: Function = () => router.push('dashboard');
+const navigateToDashboard = () => router.push('dashboard');
 
 const toggleVisible = (): void => {
   visible.value = !visible.value
