@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useColorMode } from '@vueuse/core';
-import Button from '../ui/button/Button.vue';
-import { computed, type ComputedRef } from 'vue';
+import { Button } from '@/components/ui/button';
+import { Moon, Sun } from 'lucide-vue-next';
 
 const mode = useColorMode({
     attribute: 'class',
@@ -19,21 +19,13 @@ const toggleMode: () => void = () => {
         return;
     }
 };
-
-const toggleIcon: ComputedRef<string> = computed(():string => {
-    if (mode.value === 'light' || mode.value === 'auto') {
-        return 'dark_mode';
-    } else {
-        return 'light_mode';
-    }
-});
-
-</script>
+</script>   
 
 <template>
-    <Button @click="toggleMode" class="cursor-pointer text-background p-2">
-        <span class="material-symbols-outlined">
-            {{toggleIcon}}
-        </span>
+    <Button @click="toggleMode" class="cursor-pointer text-background mx-4">
+        <component
+        :is="mode === 'light' || mode === 'auto' ? Moon : Sun"
+        :stroke-width="2.5"
+        />
     </Button>
 </template>
